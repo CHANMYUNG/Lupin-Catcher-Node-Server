@@ -15,7 +15,7 @@ let User = Schema({
 
 
 User.statics.create = function (email, password, nickname, _auth, _asUser, _asAdmin) {
-    const secret = process.env.ENTRYDSM_SECRET || "DEFAULT SECRET KEY!";
+    const secret = process.env.Lupin_Catcher_SECRET || "DEFAULT SECRET KEY!";
     const auth = _auth || "local";
     const asUser = _asUser || [];
     const asAdmin = _asAdmin || [];
@@ -41,7 +41,7 @@ User.statics.create = function (email, password, nickname, _auth, _asUser, _asAd
 }
 
 User.statics.findOneByEmail = function (_email) {
-    const secret = process.env.ENTRYDSM_SECRET || "DEFAULT SECRET KEY!";
+    const secret = process.env.Lupin_Catcher_SECRET || "DEFAULT SECRET KEY!";
     const cipher = crypto.createCipher('aes192', secret);
     let email = cipher.update(_email, 'utf8', 'hex');
     email += cipher.final('hex');
@@ -49,7 +49,7 @@ User.statics.findOneByEmail = function (_email) {
 }
 
 User.methods.verifyPassword = function (password) {
-    const secret = process.env.ENTRYDSM_SECRET || "DEFAULT SECRET KEY!";
+    const secret = process.env.Lupin_Catcher_SECRET || "DEFAULT SECRET KEY!";
     
     const encryptedPassword = crypto.createHmac('sha1', secret)
         .update(password)
