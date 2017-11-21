@@ -59,7 +59,7 @@ app.use('/', (req, res, next)=>{
 })
 app.use('/public', express.static('public'));
 app.use('/api', require('./routes'));
-server.listen(5000, () => {
+server.listen(process.env.PORT, () => {
     database();
     console.log("RUNNING ON 5000 PORT");
 })
