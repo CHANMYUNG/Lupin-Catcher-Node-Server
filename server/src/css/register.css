@@ -1,0 +1,139 @@
+html,
+body {
+    padding: 0px;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#app {
+    font-size: 0px;
+    width: 70%;
+    height: 60%;
+    margin: 0 auto;
+    margin-top: 10%;
+}
+
+#app>h1 {
+    font-family: Helvetica, sans-serif;
+    font-weight: lighter;
+    font-size: 2rem;
+    color: darkgray;
+}
+
+#app>#left {
+    width: 70%;
+    height: 70%;
+    vertical-align: top;
+    display: inline-block;
+}
+
+#left>input {
+    padding-left: 0.5rem;
+    width: 90%;
+    height: 2rem;
+}
+
+#left>label {
+    font-family: Helvetica, sans-serif;
+    font-weight: lighter;
+    color: darkgray;
+    display: block;
+    font-size: 1rem;
+}
+
+#left>label:nth-of-type(2) {
+    margin-top: 0.5rem;
+}
+
+#left>label:nth-of-type(3) {
+    margin-top: 0.5rem;
+}
+
+#left>label:nth-of-type(4) {
+    margin-top: 0.5rem;
+}
+
+#left>span {
+    font-family: Helvetica, sans-serif;
+    font-weight: lighter;
+    color: red;
+    display: block;
+    font-size: 0.8rem;
+    display: none;
+}
+
+#right {
+    width: 30%;
+    height: 70%;
+    vertical-align: top;
+    display: inline-block;
+}
+
+#right>#emailCheckBtn {
+    margin-top: 1.1rem;
+    border: 1px solid darkgray;
+    width: 50%;
+    height: 2rem;
+    display: table;
+    cursor: pointer;
+}
+
+#emailCheckBtn>#btnText {
+    font-size: 0.8rem;
+    font-family: Helvetica, sans-serif;
+    font-weight: lighter;
+    color: darkgray;
+    vertical-align: middle;
+    text-align: center;
+    display: table-cell;
+}
+
+#buttons {
+    width: 100%;
+    height: 20%;
+}
+
+#buttons>#registerBtn {
+    margin-top: 5%;
+    margin-left: 35%;
+    width: 30%;
+    height: 50%;
+    border: 1px solid darkgray;
+    display: table;
+    cursor: pointer;
+}
+
+#registerBtn>#registerBtnText {
+    font-size: 1.1rem;
+    font-family: Helvetica, sans-serif;
+    font-weight: lighter;
+    color: darkgray;
+    vertical-align: middle;
+    text-align: center;
+    display: table-cell;
+}
+
+#exit {
+    margin: 1px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    display: table;
+    border: 1px solid darkgray
+}
+
+#exit-X {
+    font-size: 1.1rem;
+    font-family: Helvetica, sans-serif;
+    font-weight: lighter;
+    color: darkgray;
+    vertical-align: middle;
+    text-align: center;
+    display: table-cell;
+}

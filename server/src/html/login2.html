@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../css/login2.css">
+        <script src="../js/login.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h1>WELCOME!</h1>
+            <div id="form">
+                <div id="inputPart">
+                    <label for="email">이메일 입력</label>
+                    <input type="email" id="email" placeholder="이메일을 입력해주세요">
+                    <label for="password">비밀번호 입력</label>
+                    <input type="password" id="password" placeholder="비밀번호를 입력해주세요">
+                </div>
+                <div id="buttonPart">
+                    <div id="button" onclick="login();">
+                        <div id="buttonText">
+                            Login
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="registerPart">
+                <div id="register" onclick="openRegister()">회원가입</a></div>
+            </div>
+        </div>
+    </body>
+</html>

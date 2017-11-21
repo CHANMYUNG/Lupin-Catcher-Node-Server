@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login Page</title>
+        <meta charset="utf-8">
+        <style media = "screen" type = "text/css">
+            body, html{
+                width:100%;
+                height:100%;
+                margin:0 auto;
+            }
+
+            *{
+                margin:0;
+                padding:0;
+                border:0;
+                outline:none;
+                box-sizing:border-box;
+            }
+
+            #app{
+                border:1px solid darkgray;
+                width:30rem;
+                height:100%;
+                margin:0 auto;
+            }
+
+            #app > h1{
+                color:#c6c6c6;
+                letter-spacing: 1px;
+                margin-top:5rem;
+            }
+
+            #cover{
+                width:100%;
+                height:15rem;
+                border-bottom:1px solid darkgray;
+                border-top:1px solid darkgray;
+                margin-top:3rem;
+                font-size:0;
+            }
+
+            #cover #loginPart{
+                width:70%;
+                height:100%;
+                border-right:1px solid darkgray;
+                display:inline-block;
+                vertical-align: top;
+            }
+
+            #loginPart label{
+                display:block;
+                font-size:1rem;
+            }
+
+            #loginPart input{
+                border:1px solid darkgray;
+                display:block;
+                width:80%;
+                height:2.4rem;
+                padding-left:0.5rem;
+            }
+
+            #loginPart label:nth-of-type(2){
+                margin-top:1rem;
+            }
+
+            #cover #buttonPart{
+                width:30%;
+                height:100%;
+                display:inline-block;
+                vertical-align: top;
+            }
+
+            #buttonPart #loginBtn{
+                width:80%;
+                height:7.2rem;
+                border:1px solid darkgray;
+                margin-top:1.1rem;
+                display:table;
+                cursor:pointer;
+            }
+
+            #loginBtn #loginBtnText{
+                font-size:1.5rem;
+                text-align: center;
+                display:table-cell;
+                vertical-align: middle;
+            }
+
+        </style>
+    </head>
+    <body draggable = "false">
+        <div id = "app">
+            <h1>WELCOME!</h1>
+            <div id = "cover">
+                <div id = "loginPart">
+                    <label for = "email">이메일 입력</label>
+                    <input type = "email" id = "email" placeholder = "이메일을 입력해주세요.">
+
+                    <label for = "password">비밀번호 입력</label>
+                    <input type = "password" id = "password" placeholder = "비밀번호를 입력해주세요.">
+                </div>
+                <div id = "buttonPart">
+                    <div id = "loginBtn">
+                        <div id = "loginBtnText">
+                            Login
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,43 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../css/register.css">
+    <script src="../js/register.js"></script>
+</head>
+
+<body>
+    <div id="exit">
+        <div id="exit-X" onclick="exit();">X</div>
+    </div>
+    <div id="app">
+        <h1>회원가입</h1>
+        <div id="left">
+            <label for="email">이메일 입력</label>
+            <input type="email" id="email" placeholder="이메일을 입력해주세요" oninput="emailValidation();">
+            <span id="emailNotice"></span>
+            <label for="password">비밀번호 입력</label>
+            <input type="password" class="passwordFields" id="password" placeholder="비밀번호를 입력해주세요" oninput="passwordValidation();">
+            <span id="passwordNotice"></span>
+            <label for="re_password">비밀번호 재입력</label>
+            <input type="password" class="passwordFields" id="re_password" placeholder="비밀번호를 재입력해주세요" oninput="passwordMatch();">
+            <span id="rePasswordNotice"></span>
+            <label for="nickname">닉네임 입력</label>
+            <input type="text" id="nickname" placeholder="닉네임을 입력해주세요">
+        </div>
+        <div id="right">
+            <div id="emailCheckBtn" onclick="emailValidationFromServer();">
+                <div id="btnText">이메일 검사</div>
+            </div>
+        </div>
+        <div id="buttons">
+            <div id="registerBtn" onclick="register();">
+                <div id="registerBtnText">
+                    회원가입
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
