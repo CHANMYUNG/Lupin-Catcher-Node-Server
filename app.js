@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const socketCookieParser = require('socket.io-cookie');
 const morgan = require('morgan');
+const cors = require('cors');
+
 let sharedSession = require('express-socket.io-session')
 let io = require('socket.io')(server);
 
@@ -18,6 +20,8 @@ const session = require('express-session')({
 
 
 app.use(morgan('dev'));
+
+app.use(cors());
 
 app.use(bodyParser.urlencoded({
     extended: false
