@@ -5,7 +5,7 @@ const crypto = require('crypto');
 let User = Schema({
     "email": { type: String, required: true, unique: true },
     "password": { type: String },
-    "nickname": { type: String, required: true, unique: true },
+    "nickname": { type: String, required: true },
     "auth": { type: String, required: true },
     "asUser": [Schema.Types.ObjectId],
     "asAdmin": [Schema.Types.ObjectId]
