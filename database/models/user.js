@@ -69,10 +69,8 @@ User.statics.createRefreshToken = function () {
             }).then(user => {
                 if(!user) {
                     resolve(refreshToken)
-                    break;
-                } else {
-                    continue;
-                }
+                    return;
+                } 
             }).catch(err => {
                 console.log(err)
                 throw err;
