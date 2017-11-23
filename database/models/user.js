@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const crypto = require('crypto');
+const uuid = require('uuid/v4');
 
 let User = Schema({
     "email": { type: String, required: true, unique: true },
@@ -55,5 +56,28 @@ User.methods.verifyPassword = function (password) {
         .update(password)
         .digest('base64');
     return this.password == encryptedPassword;
+}
+
+User.statics.createRefreshToken = function () {
+    const UserModel = this;
+    return new Promise((resolve, reject)=>{
+        while(true) {
+
+            let refreshToken = uuid();
+            UserModel.findOne({
+                refreshToken
+            }).then(user => {
+                if(!user) {
+                    resolve(refreshToken)
+                    break;
+                } else {
+                    continue;
+                }
+            }).catch(err => {
+                console.log(err)
+                throw err;
+            })
+        }
+    })
 }
 module.exports = mongoose.model('User', User);

@@ -1,6 +1,7 @@
 const passport = require('passport');
 let router = require('express').Router();
 const User = require('../../database/models/user');
+const secret = process.env.JWT_SECRET
 
 exports.localAuth = (req, res) => {
     passport.authenticate('signin-local', function (err, user) {
@@ -16,13 +17,33 @@ exports.localAuth = (req, res) => {
                     "message": "Failed to serializing"
                 })
             } else {
-                res.cookie('lupinCatcherSessionId', user, {
-                    expires: new Date(Date.now() + 900000),
-                    httpOnly: false
-                });
-                res.status(200).json({
-                    "cookie": user
-                });
+                let response = {
+
+                }
+                User.createRefreshToken()
+                    .then(token => {
+                        response.refreshToken = token;
+                        return new Promise((resolve, reject) => {
+                            jwt.sign({
+                                    user
+                                },
+                                secret, {
+                                    issuer: "lupin-catcher-node-server.herokuapp.com",
+                                    subject: 'userInfo',
+                                    expiresIn: '10m'
+                                }, (err, token) => {
+                                    if (err) reject(err)
+                                    resolve(token)
+                                })
+                        })
+                    }).then(token => {
+                        response.token = token;
+                        res.status(200).json(response);
+                    }).catch(err => {
+                        res.status(500).json({
+                            message: err.message
+                        });
+                    });
             }
         });
     })(req, res);
