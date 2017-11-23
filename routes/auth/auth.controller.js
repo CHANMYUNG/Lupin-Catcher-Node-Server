@@ -20,7 +20,9 @@ exports.localAuth = (req, res) => {
                     expires: new Date(Date.now() + 900000),
                     httpOnly: false
                 });
-                res.sendStatus(200);
+                res.status(200).json({
+                    "cookie": user
+                });
             }
         });
     })(req, res);
