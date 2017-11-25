@@ -1,6 +1,7 @@
 const passport = require('passport');
 let router = require('express').Router();
 const User = require('../../database/models/user');
+const jwt = require('jsonwebtoken');
 const secret = process.env.JWT_SECRET
 
 exports.localAuth = (req, res) => {
@@ -20,9 +21,13 @@ exports.localAuth = (req, res) => {
                 let response = {
 
                 }
-                User.createRefreshToken()
-                    .then(token => {
-                        response.refreshToken = token;
+                User.findById(user)
+                    .then(userInstance => {
+                        return userInstance.updateRefreshToken()
+                    })
+                    .then(userInstance => {
+                        console.log(userInstance);
+                        response.refreshToken = userInstance.refreshToken;
                         return new Promise((resolve, reject) => {
                             jwt.sign({
                                     user
@@ -36,14 +41,17 @@ exports.localAuth = (req, res) => {
                                     resolve(token)
                                 })
                         })
-                    }).then(token => {
+                    })
+                    .then(token => {
                         response.token = token;
-                        res.status(200).json(response);
-                    }).catch(err => {
+                        res.status(200).json(response)
+                    })
+                    .catch(err => {
+                        console.log(err);
                         res.status(500).json({
-                            message: err.message
-                        });
-                    });
+                            'message': err.message
+                        })
+                    })
             }
         });
     })(req, res);

@@ -31,6 +31,13 @@ app.use(bodyParser.json());
 
 app.use(cookieParser());
 
+app.post('/webhook', function(req, res) {
+    if (req.query['hub.verify_token'] === 'I HAVE A PEN') {
+        return res.send(req.query['hub.challenge']);
+    }
+    return res.send('Error, wrong validation token');
+});
+
 app.use(session); // 세션 활성화
 app.use(require('passport').initialize()); // passport 구동
 app.use(require('passport').session()); // 세션 연결
@@ -61,9 +68,9 @@ app.use('/', (req, res, next)=>{
     console.log(req.cookies);
     next();
 })
-app.use('/public', express.static('public'));
+app.use('/public', express.static('src'));
 app.use('/api', require('./routes'));
 server.listen(process.env.PORT, () => {
     database();
-    console.log("RUNNING ON 5000 PORT");
+    console.log(`RUNNING ON ${process.env.PORT} PORT`);
 })

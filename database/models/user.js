@@ -9,7 +9,8 @@ let User = Schema({
     "nickname": { type: String, required: true },
     "auth": { type: String, required: true },
     "asUser": [Schema.Types.ObjectId],
-    "asAdmin": [Schema.Types.ObjectId]
+    "asAdmin": [Schema.Types.ObjectId],
+    "refreshToken": { type: String, required: true, unique: true }
 }, {
         collection: "User"
     });
@@ -37,7 +38,8 @@ User.statics.create = function (email, password, nickname, _auth, _asUser, _asAd
         nickname,
         auth,
         asUser,
-        asAdmin
+        asAdmin,
+        refreshToken: generateRefreshToken()
     }).save();
 }
 
@@ -58,24 +60,15 @@ User.methods.verifyPassword = function (password) {
     return this.password == encryptedPassword;
 }
 
-User.statics.createRefreshToken = function () {
-    const UserModel = this;
-    return new Promise((resolve, reject)=>{
-        while(true) {
+User.methods.updateRefreshToken = function() {
+    this.refreshToken = generateRefreshToken();
+    this.markModified('refreshToken');
 
-            let refreshToken = uuid();
-            UserModel.findOne({
-                refreshToken
-            }).then(user => {
-                if(!user) {
-                    resolve(refreshToken)
-                    return;
-                } 
-            }).catch(err => {
-                console.log(err)
-                throw err;
-            })
-        }
-    })
+    return this.save();
 }
+
+function generateRefreshToken(){
+    return new Date().getTime().toString() + Math.floor(Math.random()*1000000);
+}
+
 module.exports = mongoose.model('User', User);
