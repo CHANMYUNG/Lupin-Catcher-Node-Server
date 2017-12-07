@@ -124,3 +124,52 @@ exports.signup = (req, res) => {
             }
         })
 }
+
+exports.tokenRefresh = (req, res) => {
+    const refreshToken = req.query.refreshToken;
+    User.findOne({refreshToken})
+        .then(user => {
+            if (!user) {
+                throw Error('User Not Found')
+            } 
+            return new Promise((resolve, reject) => {
+                jwt.sign({
+                        "user": user._id
+                    },
+                    secret, {
+                        issuer: "lupin-catcher-node-server.herokuapp.com",
+                        subject: 'userInfo',
+                        expiresIn: '10m'
+                    }, (err, token) => {
+                        if (err) reject(err)
+                        resolve(token)
+                    })
+            })
+        })
+        .then(token => {
+            res.status(200).json({token});
+        })
+        .catch(err => {
+            if (err.message === 'User Not Found') res.sendStatus(204)
+            else res.status(500).json({"message": err.message});
+        })
+}
+
+exports.getUserInfo = (req, res) => {
+    const uid = req.decoded.user;
+    console.log(uid);
+    User.findById(uid)
+        .then(user => {
+            if (!user) {
+                res.status(400).json({
+                "message": "User Not Found"
+                })
+            }
+            else res.status(200).json(user)
+        })
+        .catch(err => {
+            res.status(500).json({
+                "message": err.message
+            });
+        })
+}

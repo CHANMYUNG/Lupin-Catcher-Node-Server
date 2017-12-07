@@ -10,7 +10,8 @@ let User = Schema({
     "auth": { type: String, required: true },
     "asUser": [Schema.Types.ObjectId],
     "asAdmin": [Schema.Types.ObjectId],
-    "refreshToken": { type: String, required: true, unique: true }
+    "refreshToken": { type: String, required: true, unique: true },
+    "socketId": { type: String, unique: true }
 }, {
         collection: "User"
     });
@@ -21,7 +22,7 @@ User.statics.create = function (email, password, nickname, _auth, _asUser, _asAd
     const auth = _auth || "local";
     const asUser = _asUser || [];
     const asAdmin = _asAdmin || [];
-
+    const socketId = null;
     const cipher = crypto.createCipher('aes192', secret);
     let encryptedEmail = cipher.update(email, 'utf8', 'hex');
     encryptedEmail += cipher.final('hex');
@@ -39,7 +40,8 @@ User.statics.create = function (email, password, nickname, _auth, _asUser, _asAd
         auth,
         asUser,
         asAdmin,
-        refreshToken: generateRefreshToken()
+        refreshToken: generateRefreshToken(),
+        socketId
     }).save();
 }
 

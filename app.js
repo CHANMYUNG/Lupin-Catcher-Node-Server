@@ -31,20 +31,6 @@ app.use(bodyParser.json());
 
 app.use(cookieParser());
 
-app.get('/webhook', function(req, res) {
-    if (req.query['hub.verify_token'] === 'I HAVE A PEN') {
-        return res.send(req.query['hub.challenge']);
-    }
-    return res.send('Error, wrong validation token');
-});
-
-app.post('/webhook', function(req, res) {
-    if (req.query['hub.verify_token'] === 'I HAVE A PEN') {
-        return res.send(req.query['hub.challenge']);
-    }
-    return res.send('Error, wrong validation token');
-});
-
 app.use(session); // 세션 활성화
 app.use(require('passport').initialize()); // passport 구동
 app.use(require('passport').session()); // 세션 연결
