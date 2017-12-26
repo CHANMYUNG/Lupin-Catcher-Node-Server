@@ -21,7 +21,10 @@ const session = require('express-session')({
 
 app.use(morgan('dev'));
 
-app.use(cors());
+app.use(cors({
+    origin: true,
+    credentials: true
+}));
 
 app.use(bodyParser.urlencoded({
     extended: false
